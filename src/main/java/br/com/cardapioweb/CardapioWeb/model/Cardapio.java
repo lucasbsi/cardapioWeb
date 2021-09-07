@@ -21,7 +21,7 @@ public class Cardapio {
     public Cardapio() {
     }
 
-    public Cardapio(Integer id, String nome, Item item) {
+    public Cardapio(Integer id, String nome, List<Item> item) {
         this.id = id;
         this.nome = nome;
         this.item = item;
@@ -43,20 +43,20 @@ public class Cardapio {
         this.nome = nome;
     }
 
-    public Item getItem() {
+    public List<Item> getItem() {
         return item;
     }
 
-    public void setItem(Item item) {
+    public void setItem(List<Item> item) {
         this.item = item;
     }
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 61 * hash + Objects.hashCode(this.id);
-        hash = 61 * hash + Objects.hashCode(this.nome);
-        hash = 61 * hash + Objects.hashCode(this.item);
+        int hash = 7;
+        hash = 17 * hash + Objects.hashCode(this.id);
+        hash = 17 * hash + Objects.hashCode(this.nome);
+        hash = 17 * hash + Objects.hashCode(this.item);
         return hash;
     }
 
@@ -83,6 +83,9 @@ public class Cardapio {
         }
         return true;
     }
+    
+    
+    
     
         
 }
