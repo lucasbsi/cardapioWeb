@@ -5,6 +5,7 @@
  */
 package br.com.cardapioweb.CardapioWeb.model;
 
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -15,7 +16,7 @@ public class Cardapio {
     
     private Integer id;
     private String nome;
-    private Item item;
+    private List<Item> item;
 
     public Cardapio() {
     }
