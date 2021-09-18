@@ -5,16 +5,31 @@
  */
 package br.com.cardapioweb.CardapioWeb.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+import javax.persistence.*;
 
 /**
  *
  * @author lucas
  */
-public class Item {
+@Entity
+public class Item implements Serializable {
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @Column(nullable = false, length = 40, unique = true, updatable = true)
     private String descricao;
+    @Column(nullable = false, length = 6, unique = false, updatable = true)
     private Double valorAdicional;
+    
+    @JsonBackReference
+    @ManyToMany
+    private List<Cardapio> cardapios = new ArrayList<>();
 
     public Item() {
     }
@@ -48,6 +63,16 @@ public class Item {
     public void setValorAdicional(Double valorAdicional) {
         this.valorAdicional = valorAdicional;
     }
+
+    public List<Cardapio> getCardapios() {
+        return cardapios;
+    }
+
+    public void setCardapios(List<Cardapio> cardapios) {
+        this.cardapios = cardapios;
+    }
+    
+    
 
     @Override
     public int hashCode() {

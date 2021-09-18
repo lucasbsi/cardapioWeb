@@ -5,36 +5,50 @@
  */
 package br.com.cardapioweb.CardapioWeb.model;
 
+import java.io.Serializable;
 import java.util.Objects;
+import javax.persistence.*;
 
 /**
  *
  * @author lucas
  */
-public class Usuario {
-    private Integer IdUsuario;
+@Entity
+@Table(name = "usuario")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)//junta todos atributos
+public class Usuario implements Serializable{
+    private static final long serialVersionUID = 1L;
+    
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
+    
+    @Column(nullable = false, length = 8, unique = true, updatable = false)
     private String login;
+    @Column(nullable = false, length = 10)
     private String senha;
+    @Column(nullable = false, length = 40)
     private String nome;
+    @Column(nullable = true, length = 14)
     private String telefone;
 
     public Usuario() {
     }
 
-    public Usuario(Integer IdUsuario, String login, String senha, String nome, String telefone) {
-        this.IdUsuario = IdUsuario;
+    public Usuario(Integer id, String login, String senha, String nome, String telefone) {
+        this.id = id;
         this.login = login;
         this.senha = senha;
         this.nome = nome;
         this.telefone = telefone;
     }
 
-    public Integer getIdUsuario() {
-        return IdUsuario;
+    public Integer getId() {
+        return id;
     }
 
-    public void setIdUsuario(Integer IdUsuario) {
-        this.IdUsuario = IdUsuario;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getLogin() {
@@ -72,11 +86,8 @@ public class Usuario {
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 71 * hash + Objects.hashCode(this.IdUsuario);
-        hash = 71 * hash + Objects.hashCode(this.login);
-        hash = 71 * hash + Objects.hashCode(this.senha);
-        hash = 71 * hash + Objects.hashCode(this.nome);
-        hash = 71 * hash + Objects.hashCode(this.telefone);
+        hash = 97 * hash + Objects.hashCode(this.id);
+        hash = 97 * hash + Objects.hashCode(this.login);
         return hash;
     }
 
@@ -95,20 +106,15 @@ public class Usuario {
         if (!Objects.equals(this.login, other.login)) {
             return false;
         }
-        if (!Objects.equals(this.senha, other.senha)) {
-            return false;
-        }
-        if (!Objects.equals(this.nome, other.nome)) {
-            return false;
-        }
-        if (!Objects.equals(this.telefone, other.telefone)) {
-            return false;
-        }
-        if (!Objects.equals(this.IdUsuario, other.IdUsuario)) {
+        if (!Objects.equals(this.id, other.id)) {
             return false;
         }
         return true;
     }
+
+    
+
+    
     
     
     

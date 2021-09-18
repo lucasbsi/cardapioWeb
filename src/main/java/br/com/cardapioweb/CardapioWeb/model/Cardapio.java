@@ -5,18 +5,30 @@
  */
 package br.com.cardapioweb.CardapioWeb.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import javax.persistence.*;
 
 /**
  *
  * @author lucas
  */
-public class Cardapio {
-    
+@Entity
+public class Cardapio implements Serializable {
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private Integer id;
+    @Column(nullable = false, length = 40, unique = true, updatable = true)
     private String nome;
-    private List<Item> item;
+    
+    @JsonManagedReference
+    @ManyToMany
+    private List<Item> itens = new ArrayList<>();;
 
     public Cardapio() {
     }
@@ -24,7 +36,7 @@ public class Cardapio {
     public Cardapio(Integer id, String nome, List<Item> item) {
         this.id = id;
         this.nome = nome;
-        this.item = item;
+        this.itens = item;
     }
 
     public Integer getId() {
@@ -44,11 +56,11 @@ public class Cardapio {
     }
 
     public List<Item> getItem() {
-        return item;
+        return itens;
     }
 
-    public void setItem(List<Item> item) {
-        this.item = item;
+    public void setItem(List<Item> itens) {
+        this.itens = itens;
     }
 
     @Override
@@ -56,7 +68,7 @@ public class Cardapio {
         int hash = 7;
         hash = 17 * hash + Objects.hashCode(this.id);
         hash = 17 * hash + Objects.hashCode(this.nome);
-        hash = 17 * hash + Objects.hashCode(this.item);
+        hash = 17 * hash + Objects.hashCode(this.itens);
         return hash;
     }
 
@@ -78,7 +90,7 @@ public class Cardapio {
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
-        if (!Objects.equals(this.item, other.item)) {
+        if (!Objects.equals(this.itens, other.itens)) {
             return false;
         }
         return true;
