@@ -28,7 +28,10 @@ public class Cardapio implements Serializable {
     
     @JsonManagedReference
     @ManyToMany
-    private List<Item> itens = new ArrayList<>();;
+    private List<Item> itens = new ArrayList<>();
+    
+    @Column(nullable = false)
+    private DiaSemanaEnum dia;
 
     public Cardapio() {
     }
@@ -62,6 +65,16 @@ public class Cardapio implements Serializable {
     public void setItem(List<Item> itens) {
         this.itens = itens;
     }
+
+    public DiaSemanaEnum getDia() {
+        return dia;
+    }
+
+    public void setDia(DiaSemanaEnum dia) {
+        this.dia = dia;
+    }
+    
+    
 
     @Override
     public int hashCode() {
