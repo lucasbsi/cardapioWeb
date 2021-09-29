@@ -5,6 +5,7 @@
  */
 package br.com.cardapioweb.CardapioWeb.model;
 
+import br.com.cardapioweb.CardapioWeb.annotation.PasswordValidation;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.*;
@@ -34,6 +35,7 @@ public class Usuario implements Serializable{
     @Column(nullable = false, length = 10)
     @NotBlank(message= "Senha é obrigatório")
     @Length(max= 10, message= "Senha deve ter no máximo 10 caracteres.")
+    @PasswordValidation (message = "Senha inválida")
     private String senha;
     
     @Column(nullable = false, length = 40)

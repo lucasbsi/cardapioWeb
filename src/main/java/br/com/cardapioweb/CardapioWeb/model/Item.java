@@ -5,6 +5,7 @@
  */
 package br.com.cardapioweb.CardapioWeb.model;
 
+import br.com.cardapioweb.CardapioWeb.annotation.DescriptionValidation;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
@@ -31,6 +32,7 @@ public class Item implements Serializable {
     @Column(nullable = false, length = 40, unique = true, updatable = true)
     @NotBlank(message= "A descrição do item é obrigatório")
     @Length(max= 40, message= "A descrição do item deve ter no máximo 40 caracteres.")
+    @DescriptionValidation(message = "A descrição está no formato incorreto. Ex.: Feijão")
     private String descricao;
     
     @Column(nullable = false, length = 6, unique = false, updatable = true)
