@@ -5,6 +5,7 @@
  */
 package br.com.cardapioweb.CardapioWeb.model;
 
+import br.com.cardapioweb.CardapioWeb.annotation.DescriptionValidation;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
@@ -32,6 +33,7 @@ public class Cardapio implements Serializable {
     @Column(nullable = false, length = 40, unique = true, updatable = true)
     @NotBlank(message= "Nome do Cardápio é obrigatório")
     @Length(max= 40, message= "Nome do Cardápio deve ter no máximo 40 caracteres.")
+    @DescriptionValidation(message = "A descrição está no formato incorreto. Ex.: Feijão")
     private String nome;
     
     @ManyToMany(mappedBy="cardapios")
