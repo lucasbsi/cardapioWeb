@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import org.hibernate.validator.constraints.Length;
 
 /**
  *
@@ -20,16 +23,22 @@ import javax.persistence.*;
 @Entity
 public class Item implements Serializable {
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    
     @Column(nullable = false, length = 40, unique = true, updatable = true)
+    @NotBlank(message= "A descrição do item é obrigatório")
+    @Length(max= 40, message= "A descrição do item deve ter no máximo 40 caracteres.")
     private String descricao;
+    
     @Column(nullable = false, length = 6, unique = false, updatable = true)
     private Double valorAdicional;
     
     @JsonIgnore
     @ManyToMany
+    @Valid//ao validar o objeto da classe principal, também valide os dependentes 
     private List<Cardapio> cardapios = new ArrayList<>();
 
     public Item() {

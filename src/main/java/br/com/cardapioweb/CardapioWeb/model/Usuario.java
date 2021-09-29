@@ -8,6 +8,9 @@ package br.com.cardapioweb.CardapioWeb.model;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.*;
+import javax.validation.constraints.*;
+import org.hibernate.validator.constraints.Length;
+
 
 /**
  *
@@ -24,12 +27,22 @@ public class Usuario implements Serializable{
     private Integer id;
     
     @Column(nullable = false, length = 8, unique = true, updatable = false)
+    @NotBlank(message= "Login é obrigatório")
+    @Length(max= 8, message= "Login deve ter no máximo 8 caracteres.")
     private String login;
+    
     @Column(nullable = false, length = 10)
+    @NotBlank(message= "Senha é obrigatório")
+    @Length(max= 10, message= "Senha deve ter no máximo 10 caracteres.")
     private String senha;
+    
     @Column(nullable = false, length = 40)
+    @NotBlank(message= "Nome é obrigatório")
+    @Length(max= 40, message= "Nome deve ter no máximo 40 caracteres.")
     private String nome;
+    
     @Column(nullable = true, length = 14)
+    @Length(max= 14, message= "Login deve ter no máximo 14 caracteres.")
     private String telefone;
 
     public Usuario() {

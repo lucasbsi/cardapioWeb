@@ -12,6 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.Length;
 
 /**
  *
@@ -20,18 +24,24 @@ import javax.persistence.*;
 @Entity
 public class Cardapio implements Serializable {
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private Integer id;
+    
     @Column(nullable = false, length = 40, unique = true, updatable = true)
+    @NotBlank(message= "Nome do Cardápio é obrigatório")
+    @Length(max= 40, message= "Nome do Cardápio deve ter no máximo 40 caracteres.")
     private String nome;
     
-    
     @ManyToMany(mappedBy="cardapios")
+    @Valid
     private List<Item> itens = new ArrayList<>();
     
     @Enumerated
     @Column(nullable = false)
+    @NotNull(message = "Necessário indicar o dia da semana")
+    //@Valid
     private DiaSemanaEnum dia;
 
     public Cardapio() {

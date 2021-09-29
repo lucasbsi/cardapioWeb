@@ -7,6 +7,8 @@ package br.com.cardapioweb.CardapioWeb.model;
 
 import java.util.Objects;
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import org.hibernate.validator.constraints.br.CPF;
 
 /**
  *
@@ -16,6 +18,8 @@ import javax.persistence.*;
 public class Funcionario extends Usuario {
     
     @Column(length = 14, unique = true, updatable = false, nullable = false)
+    @CPF(message = "CPF inválido")
+    @NotBlank(message = "CPF obrigatório")
     private String cpf;
 
     public Funcionario() {
