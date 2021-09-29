@@ -15,7 +15,7 @@ import javax.persistence.*;
 @Entity
 public class Funcionario extends Usuario {
     
-    @Column(length = 14, unique = true, updatable = false)
+    @Column(length = 14, unique = true, updatable = false, nullable = false)
     private String cpf;
 
     public Funcionario() {

@@ -26,10 +26,11 @@ public class Cardapio implements Serializable {
     @Column(nullable = false, length = 40, unique = true, updatable = true)
     private String nome;
     
-    @JsonManagedReference
-    @ManyToMany
+    
+    @ManyToMany(mappedBy="cardapios")
     private List<Item> itens = new ArrayList<>();
     
+    @Enumerated
     @Column(nullable = false)
     private DiaSemanaEnum dia;
 

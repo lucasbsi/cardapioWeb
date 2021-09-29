@@ -15,7 +15,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "usuario")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)//junta todos atributos
+@Inheritance(strategy = InheritanceType.JOINED)//cria uma tabela para cada classe
 public class Usuario implements Serializable{
     private static final long serialVersionUID = 1L;
     

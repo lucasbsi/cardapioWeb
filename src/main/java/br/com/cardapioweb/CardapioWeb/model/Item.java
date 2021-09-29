@@ -6,6 +6,7 @@
 package br.com.cardapioweb.CardapioWeb.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +28,7 @@ public class Item implements Serializable {
     @Column(nullable = false, length = 6, unique = false, updatable = true)
     private Double valorAdicional;
     
-    @JsonBackReference
+    @JsonIgnore
     @ManyToMany
     private List<Cardapio> cardapios = new ArrayList<>();
 
