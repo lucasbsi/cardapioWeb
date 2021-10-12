@@ -5,7 +5,6 @@
  */
 package br.com.cardapioweb.CardapioWeb.model;
 
-import java.util.Objects;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import org.hibernate.validator.constraints.br.CPF;
@@ -15,6 +14,7 @@ import org.hibernate.validator.constraints.br.CPF;
  * @author lucas
  */
 @Entity
+@Table(name = "funcionario")
 public class Funcionario extends Usuario {
     
     @Column(length = 14, unique = true, updatable = false, nullable = false)

@@ -19,7 +19,7 @@ import javax.validation.Payload;
  */
 
 @Documented
-@Constraint(validateBy = PasswordValidator.class)
+@Constraint(validatedBy = PasswordValidator.class)
 @Target({ElementType.FIELD, ElementType.METHOD})//especifica os elementos que farão uso da annotation
 @Retention(RetentionPolicy.RUNTIME)
 public @interface PasswordValidation {

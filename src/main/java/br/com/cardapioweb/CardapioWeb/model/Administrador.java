@@ -5,7 +5,6 @@
  */
 package br.com.cardapioweb.CardapioWeb.model;
 
-import java.util.Objects;
 import javax.persistence.*;
 
 /**
@@ -13,6 +12,7 @@ import javax.persistence.*;
  * @author lucas
  */
 @Entity
+@Table(name = "administrador")
 public class Administrador extends Usuario{
 
     public Administrador() {
