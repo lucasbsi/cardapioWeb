@@ -16,6 +16,7 @@ import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Length;
 
 /**
@@ -37,13 +38,15 @@ public class Cardapio implements Serializable {
     private String nome;
     
     @ManyToMany(mappedBy="cardapios")
-    @Valid
+    //@Valid
+    @Size(min = 1)
     private List<Item> itens = new ArrayList<>();
     
     @Enumerated
     @Column(nullable = false)
     @NotNull(message = "Necessário indicar o dia da semana")
     //@Valid
+    
     private DiaSemanaEnum dia;
 
     public Cardapio() {

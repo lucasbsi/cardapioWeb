@@ -40,7 +40,7 @@ public class Item implements Serializable {
     
     @JsonIgnore
     @ManyToMany
-    @Valid//ao validar o objeto da classe principal, também valide os dependentes 
+    //@Valid//ao validar o objeto da classe principal, também valide os dependentes 
     private List<Cardapio> cardapios = new ArrayList<>();
 
     public Item() {
