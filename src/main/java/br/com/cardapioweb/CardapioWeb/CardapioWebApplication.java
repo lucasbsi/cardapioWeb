@@ -57,16 +57,12 @@ public class CardapioWebApplication implements CommandLineRunner{
         Item item1 = new Item();
         item1.setDescricao("Salsa");
         item1.setValorAdicional(2.0);
-        //item1.setCardapios();
         
-        itemRepo.save(item1);
         
         Item item2 = new Item();
         item2.setDescricao("Cebolinha");
         item2.setValorAdicional(3.0);
-        //item1.setCardapios();
         
-        itemRepo.save(item2);
         
         
         
@@ -77,6 +73,20 @@ public class CardapioWebApplication implements CommandLineRunner{
         card1.setDia(DiaSemanaEnum.TERCA);
         
         cardapioRepo.save(card1);
+        
+        item1.setCardapios(List.of(card1));
+        //item1.setCardapios();
+        
+        itemRepo.save(item1);
+        
+        item2.setCardapios(List.of(card1));
+        //item1.setCardapios();
+        
+        itemRepo.save(item2);
+        
+        
+        
+        
         
     }
 

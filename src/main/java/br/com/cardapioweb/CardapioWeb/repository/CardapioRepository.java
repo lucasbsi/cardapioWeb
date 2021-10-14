@@ -22,7 +22,7 @@ public interface CardapioRepository extends JpaRepository<Cardapio, Integer>{
     public List<Cardapio> findAllCardapio ();
     
     @Query ("SELECT c FROM Cardapio c WHERE c.dia = :dia")
-    public List<Cardapio> findByWeek (DiaSemanaEnum dia);
+    public Cardapio findByWeek (DiaSemanaEnum dia);
     
     
 }
