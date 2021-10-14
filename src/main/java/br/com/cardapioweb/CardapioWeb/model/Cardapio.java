@@ -42,11 +42,11 @@ public class Cardapio implements Serializable {
     @Size(min = 1)//restrição de um item criação de cardápio
     private List<Item> itens = new ArrayList<>();
     
-    @Enumerated
+    //@Enumerated
     @Column(nullable = false)
     @NotNull(message = "Necessário indicar o dia da semana")
     //@Valid
-    
+    @Enumerated(EnumType.STRING)
     private DiaSemanaEnum dia;
 
     public Cardapio() {
