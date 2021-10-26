@@ -70,7 +70,7 @@ public class ItemService {
         
         try {
            //rever se devo salvar o obj ou o c
-            return repo.save(obj);
+            return repo.save(c);
             
         } catch (Exception e) {
             throw new RuntimeException("Falha ao salvar o Item");

@@ -5,23 +5,22 @@
  */
 package br.com.cardapioweb.CardapioWeb.repository.service;
 
-import br.com.cardapioweb.CardapioWeb.model.Administrador;
 import br.com.cardapioweb.CardapioWeb.model.Cardapio;
 import br.com.cardapioweb.CardapioWeb.model.DiaSemanaEnum;
-import br.com.cardapioweb.CardapioWeb.model.Funcionario;
 import br.com.cardapioweb.CardapioWeb.model.Item;
 import br.com.cardapioweb.CardapioWeb.repository.CardapioRepository;
-import br.com.cardapioweb.CardapioWeb.repository.FuncionarioRepository;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author lucas
  */
+@Service
 public class CardapioService {
 
     @Autowired
@@ -80,8 +79,8 @@ public class CardapioService {
         obj.setItem(itens);
         
         try {
-           //rever se devo salvar o obj ou o c
-            return repo.save(obj);
+           //rever se devo salvar o obj ou o c// revisado e ok
+            return repo.save(c);
             
         } catch (Exception e) {
             throw new RuntimeException("Falha ao salvar o Cardapio");

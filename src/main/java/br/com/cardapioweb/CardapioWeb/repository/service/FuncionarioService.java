@@ -61,6 +61,10 @@ public class FuncionarioService {
         alterarSenha(obj, senhaAtual, novaSenha, confirmarNovaSenha);
         try {
             f.setCpf(obj.getCpf());// garante que o cpf permaneça o mesmo já cadastrado no banco
+            f.setLogin(obj.getLogin());
+            f.setSenha(obj.getSenha());
+            
+            
             return repo.save(f);
         } catch (Exception e) {
             throw new RuntimeException("Falha ao salvar o funcionario");
