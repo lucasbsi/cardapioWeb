@@ -41,6 +41,8 @@ public class CardapioWebApplication implements CommandLineRunner{
         
         administradorRepo.save(adm1);
         
+        
+        
         //Funcionario;
         Funcionario fun1 = new Funcionario();
         fun1.setLogin("amabit");
@@ -50,6 +52,25 @@ public class CardapioWebApplication implements CommandLineRunner{
         fun1.setCpf("215.063.620-44");
         
         funcionarioRepo.save(fun1);
+        
+        Administrador adm2 = new Administrador();
+        adm2.setLogin("bca");
+        adm2.setNome("bca");
+        adm2.setSenha("senhA962@_");
+        adm2.setTelefone("(22) 8888-8888");
+        
+        administradorRepo.save(adm2);
+        
+        
+         //Funcionario;
+        Funcionario fun2 = new Funcionario();
+        fun2.setLogin("zeus");
+        fun2.setNome("roberval");
+        fun2.setSenha("sogrA022@&");
+        fun2.setTelefone("(22) 1234-9999");
+        fun2.setCpf("173.475.180-08");
+        
+        funcionarioRepo.save(fun2);
         
         
         
@@ -63,16 +84,33 @@ public class CardapioWebApplication implements CommandLineRunner{
         item2.setDescricao("Cebolinha");
         item2.setValorAdicional(3.0);
         
+         Item item3 = new Item();
+        item3.setDescricao("Feijão");
+        item3.setValorAdicional(2.0);
+        
+        
+        Item item4 = new Item();
+        item4.setDescricao("Arroz");
+        item4.setValorAdicional(3.0);
+        
         
         
         
          //Cardapio
         Cardapio card1 = new Cardapio();
         card1.setNome("Hojé é segunda");
-        card1.setItem(List.of(item1, item2));
+        card1.setItem(List.of(item1, item2, item3, item4));
         card1.setDia(DiaSemanaEnum.TERCA);
         
         cardapioRepo.save(card1);
+        //----------------------------------------------------
+        
+        Cardapio card2 = new Cardapio();
+        card2.setNome("Hojé é Sexta");
+        card2.setItem(List.of(item3, item4));
+        card2.setDia(DiaSemanaEnum.SEXTA);
+        
+        cardapioRepo.save(card2);
         
         item1.setCardapios(List.of(card1));
         //item1.setCardapios();
@@ -83,6 +121,16 @@ public class CardapioWebApplication implements CommandLineRunner{
         //item1.setCardapios();
         
         itemRepo.save(item2);
+        
+        item3.setCardapios(List.of(card1, card2));
+        //item1.setCardapios();
+        
+        itemRepo.save(item3);
+        
+        item4.setCardapios(List.of(card1,card2));
+        //item1.setCardapios();
+        
+        itemRepo.save(item4);
         
         
         
