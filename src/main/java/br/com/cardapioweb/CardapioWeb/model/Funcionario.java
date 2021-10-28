@@ -5,6 +5,7 @@
  */
 package br.com.cardapioweb.CardapioWeb.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import org.hibernate.validator.constraints.br.CPF;
@@ -15,6 +16,7 @@ import org.hibernate.validator.constraints.br.CPF;
  */
 @Entity
 @Table(name = "funcionario")
+@JsonIgnoreProperties(value = "senha", allowGetters = false, allowSetters = true)// restringe a senha no get
 public class Funcionario extends Usuario {
     
     @Column(length = 14, unique = true, updatable = false, nullable = false)

@@ -5,6 +5,7 @@
  */
 package br.com.cardapioweb.CardapioWeb.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 
 /**
@@ -13,6 +14,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "administrador")
+@JsonIgnoreProperties(value = "senha", allowGetters = false, allowSetters = true)// restringe a senha no get
 public class Administrador extends Usuario{
 
     public Administrador() {

@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -58,14 +60,16 @@ public class AdministradorController {
     }
     
     @PutMapping("/{id}")
-    public ResponseEntity update(@PathVariable("id") Integer id, @Valid @RequestBody Administrador administrador){
+    public ResponseEntity update(@PathVariable("id") Integer id, @RequestBody Administrador administrador){
         administrador.setId(id);
         service.update(administrador, "", "", "");
         
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
     
-    @DeleteMapping(path = "/{id")
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    //@DeleteMapping(path = "/{id}")
+    @ResponseBody
     public ResponseEntity delete(@PathVariable("id") Integer id){
         service.delete(id);
         return ResponseEntity.ok().build();
