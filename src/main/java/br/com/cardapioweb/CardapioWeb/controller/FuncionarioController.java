@@ -7,7 +7,7 @@ package br.com.cardapioweb.CardapioWeb.controller;
 
 import br.com.cardapioweb.CardapioWeb.model.Administrador;
 import br.com.cardapioweb.CardapioWeb.model.Funcionario;
-import br.com.cardapioweb.CardapioWeb.repository.service.FuncionarioService;
+import br.com.cardapioweb.CardapioWeb.service.FuncionarioService;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

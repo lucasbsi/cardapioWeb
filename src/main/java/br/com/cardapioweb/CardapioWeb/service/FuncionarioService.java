@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.cardapioweb.CardapioWeb.repository.service;
+package br.com.cardapioweb.CardapioWeb.service;
 
 import br.com.cardapioweb.CardapioWeb.model.Funcionario;
 import br.com.cardapioweb.CardapioWeb.model.Usuario;

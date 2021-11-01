@@ -37,7 +37,8 @@ public class Cardapio implements Serializable {
     @DescriptionValidation(message = "A descrição está no formato incorreto. Ex.: Feijão")
     private String nome;
     
-    @ManyToMany(mappedBy="cardapios")
+    //@ManyToMany(mappedBy="cardapios")
+    @ManyToMany
     //@Valid
     @Size(min = 1)//restrição de um item criação de cardápio
     private List<Item> itens = new ArrayList<>();

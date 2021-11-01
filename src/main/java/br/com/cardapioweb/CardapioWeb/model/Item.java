@@ -39,7 +39,8 @@ public class Item implements Serializable {
     private Double valorAdicional;
     
     @JsonIgnore
-    @ManyToMany
+    //@ManyToMany
+    @ManyToMany(mappedBy="itens")
     //@Valid//ao validar o objeto da classe principal, também valide os dependentes 
     private List<Cardapio> cardapios = new ArrayList<>();
 

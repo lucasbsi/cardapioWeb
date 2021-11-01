@@ -24,4 +24,7 @@ public interface ItemRepository extends JpaRepository<Item, Integer>{
     @Query ("SELECT i FROM Item i INNER JOIN i.cardapios c WHERE c.dia = :dia")
     public List<Cardapio> findItemByWeek (DiaSemanaEnum dia);
     
+    @Query ("SELECT i FROM Item i WHERE i.descricao = :descricao")
+    public List<Item> findItemByDescricao (String descricao);
+    
 }

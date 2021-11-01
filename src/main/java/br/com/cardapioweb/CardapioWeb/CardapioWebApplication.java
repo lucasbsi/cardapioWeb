@@ -72,7 +72,7 @@ public class CardapioWebApplication implements CommandLineRunner{
         
         funcionarioRepo.save(fun2);
         
-        
+        //-----------------------------------------------------------------------
         
         //Item
         Item item1 = new Item();
@@ -102,7 +102,7 @@ public class CardapioWebApplication implements CommandLineRunner{
         card1.setItem(List.of(item1, item2, item3, item4));
         card1.setDia(DiaSemanaEnum.TERCA);
         
-        cardapioRepo.save(card1);
+        
         //----------------------------------------------------
         
         Cardapio card2 = new Cardapio();
@@ -110,30 +110,23 @@ public class CardapioWebApplication implements CommandLineRunner{
         card2.setItem(List.of(item3, item4));
         card2.setDia(DiaSemanaEnum.SEXTA);
         
-        cardapioRepo.save(card2);
+       
         
         item1.setCardapios(List.of(card1));
-        //item1.setCardapios();
-        
         itemRepo.save(item1);
         
         item2.setCardapios(List.of(card1));
-        //item1.setCardapios();
-        
         itemRepo.save(item2);
         
         item3.setCardapios(List.of(card1, card2));
-        //item1.setCardapios();
-        
         itemRepo.save(item3);
         
         item4.setCardapios(List.of(card1,card2));
-        //item1.setCardapios();
-        
         itemRepo.save(item4);
         
         
-        
+        cardapioRepo.save(card1);
+        cardapioRepo.save(card2);
         
         
     }

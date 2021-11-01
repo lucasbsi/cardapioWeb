@@ -3,20 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.cardapioweb.CardapioWeb.repository.service;
+package br.com.cardapioweb.CardapioWeb.service;
 
+import br.com.cardapioweb.CardapioWeb.model.Cardapio;
 import br.com.cardapioweb.CardapioWeb.model.Item;
 import br.com.cardapioweb.CardapioWeb.repository.ItemRepository;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author lucas
  */
+@Service
 public class ItemService {
     
     @Autowired
@@ -54,7 +58,8 @@ public class ItemService {
     
     
     public Item save(Item c) {
-        
+        //Item obj = findById(c.getId());
+        verificaSeExisteDesc(c.getDescricao());
         try {
             return repo.save(c);
         } catch (Exception e) {
@@ -81,11 +86,38 @@ public class ItemService {
     public void delete(Integer id) {
         //localiza o funcionario
         Item obj = findById(id);
+        verificaSeExisteCardapio(obj.getCardapios());
         try {
             repo.delete(obj);
         } catch (Exception e) {
             throw new RuntimeException("Falha ao deletar o Item");
 
+        }
+    }
+    
+    private void verificaSeExisteCardapio(List<Cardapio> cardapios){
+        List<Integer> ids = new ArrayList<>();
+        Integer aux=0;
+        for (Cardapio c : cardapios){
+            if(!c.getItem().isEmpty()){
+                aux=1;
+                ids.add(c.getId());
+               
+            }
+        }
+        if (aux == 1){
+//            for (Integer i : ids){
+//                
+//            }
+             throw new RuntimeException("Não foi possível excluir Item contidos em cardapio. Id do cardápio:"+ids);
+        }
+    }
+    
+    private void verificaSeExisteDesc (String desc){
+        List<Item> result = repo.findItemByDescricao(desc);
+        
+        if(!result.isEmpty()){
+            throw new RuntimeException("Descricao de Item já cadastrada.");
         }
     }
     
