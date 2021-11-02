@@ -66,15 +66,16 @@ public class ItemService {
             throw new RuntimeException("Falha ao salvar o Item");
         }
     }
-    
+    //public Item update(Item c, String descricao, Double valor) {
     public Item update(Item c, String descricao, Double valor) {
         //Verifica se o item já existe
         Item obj = findById(c.getId());
-        obj.setDescricao(descricao);
-        obj.setValorAdicional(valor);
+        //obj.setDescricao(descricao);
+        //obj.setValorAdicional(valor);
         
         try {
-           //rever se devo salvar o obj ou o c
+           //persistindo a descrição do banco
+            c.setDescricao(obj.getDescricao());
             return repo.save(c);
             
         } catch (Exception e) {

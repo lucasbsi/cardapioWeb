@@ -62,7 +62,7 @@ public class AdministradorController {
     @PutMapping("/{id}")
     public ResponseEntity update(@PathVariable("id") Integer id, @RequestBody Administrador administrador){
         administrador.setId(id);
-        service.update(administrador, "", "", "");
+        service.update(administrador, "", administrador.getSenha(), administrador.getSenha());
         
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }

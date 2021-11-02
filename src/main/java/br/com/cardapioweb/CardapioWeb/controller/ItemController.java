@@ -61,6 +61,7 @@ public class ItemController {
     @PutMapping("/{id}")
     public ResponseEntity update(@PathVariable("id") Integer id, @RequestBody Item item){
         item.setId(id);
+        service.update(item, item.getDescricao(), item.getValorAdicional());
         
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }

@@ -74,12 +74,12 @@ public class CardapioService {
     
     public Cardapio update(Cardapio c, List<Item> itens, String nome) {
         //Verifica se o cardapio já existe
-        Cardapio obj = findByWeek(c.getDia());
-        obj.setNome(nome);
-        obj.setItem(itens);
+        Cardapio obj = findById(c.getId());
+//     
         
         try {
-           //rever se devo salvar o obj ou o c// revisado e ok
+            //garante que o enum não seja alterado
+            c.setDia(obj.getDia());
             return repo.save(c);
             
         } catch (Exception e) {

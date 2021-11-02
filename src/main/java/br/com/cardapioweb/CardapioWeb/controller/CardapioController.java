@@ -61,7 +61,7 @@ public class CardapioController {
     public ResponseEntity update(@PathVariable("id") Integer id, @RequestBody Cardapio cardapio){
         cardapio.setId(id);
         //rever pois a assinatura é service.update(cardapio, itens, nome)
-        service.update(cardapio, null, "");
+        service.update(cardapio, cardapio.getItem(), cardapio.getNome());
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
     

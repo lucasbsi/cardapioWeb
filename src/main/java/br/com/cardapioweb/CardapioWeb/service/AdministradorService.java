@@ -64,9 +64,9 @@ public class AdministradorService {
         Administrador obj = findById(a.getId());
         //Verifica alteração da senha
 
-        alterarSenha(obj, senhaAtual, novaSenha, confirmarNovaSenha);
+        alterarSenha(obj, obj.getSenha(), novaSenha, confirmarNovaSenha);
         try {
-           
+           a.setLogin(obj.getLogin());
             return repo.save(a);
         } catch (Exception e) {
             throw new RuntimeException("Falha ao salvar o Administrador");
