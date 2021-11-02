@@ -5,12 +5,14 @@
  */
 package br.com.cardapioweb.CardapioWeb.service;
 
+import br.com.cardapioweb.CardapioWeb.exception.NotFoundException;
 import br.com.cardapioweb.CardapioWeb.model.Cardapio;
 import br.com.cardapioweb.CardapioWeb.model.DiaSemanaEnum;
 import br.com.cardapioweb.CardapioWeb.model.Item;
 import br.com.cardapioweb.CardapioWeb.repository.CardapioRepository;
 import java.util.List;
 import java.util.Optional;
+import javax.validation.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -50,7 +52,7 @@ public class CardapioService {
     public Cardapio findById(Integer id) {
         Optional<Cardapio> result = repo.findById(id);
         if (result.isEmpty()) {
-            throw new RuntimeException("Cardapio não encontrado");
+            throw new NotFoundException("Cardapio não encontrado");
         }
         return result.get();
     }
@@ -59,7 +61,7 @@ public class CardapioService {
         try {
             return repo.findByWeek(dia);
         } catch (Exception e) {
-            throw new RuntimeException("Não localizamos o cardápio" + dia + ".");
+            throw new NotFoundException("Não localizamos o cardápio" + dia + ".");
         }
     }
     
@@ -68,9 +70,35 @@ public class CardapioService {
         try {
             return repo.save(c);
         } catch (Exception e) {
+//            Throwable t = e;
+//            while (t.getCause() != null){
+//                t = t.getCause();
+//                if (t instanceof ConstraintViolationException){
+//                    throw ((ConstraintViolationException) t);
+//                }
+//            }
             throw new RuntimeException("Falha ao salvar o Cardapio");
         }
     }
+    //----------------- teste do postman POST
+//    http://localhost:8080/apirest/cardapios/
+//    
+//    {
+//    "nome": "seg",
+//    "dia": "SEGUNDA",
+//    "item": [
+//        {
+//            "id": 3,
+//            "descricao": "Feijão",
+//            "valorAdicional": 2.0
+//        },
+//        {
+//            "id": 4,
+//            "descricao": "Arroz",
+//            "valorAdicional": 3.0
+//        }
+//    ]
+//}
     
     public Cardapio update(Cardapio c, List<Item> itens, String nome) {
         //Verifica se o cardapio já existe
@@ -83,6 +111,13 @@ public class CardapioService {
             return repo.save(c);
             
         } catch (Exception e) {
+            Throwable t = e;
+            while (t.getCause() != null){
+                t = t.getCause();
+                if (t instanceof ConstraintViolationException){
+                    throw ((ConstraintViolationException) t);
+                }
+            }
             throw new RuntimeException("Falha ao salvar o Cardapio");
         }
 

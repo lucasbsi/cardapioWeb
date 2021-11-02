@@ -5,12 +5,14 @@
  */
 package br.com.cardapioweb.CardapioWeb.service;
 
+import br.com.cardapioweb.CardapioWeb.exception.NotFoundException;
 import br.com.cardapioweb.CardapioWeb.model.Cardapio;
 import br.com.cardapioweb.CardapioWeb.model.Item;
 import br.com.cardapioweb.CardapioWeb.repository.ItemRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import javax.validation.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -42,7 +44,7 @@ public class ItemService {
         try {
             return repo.findAllItem();
         } catch (Exception e) {
-            throw new RuntimeException("Erro para localizar o cardápio");
+            throw new NotFoundException("Erro para localizar o cardápio");
         }
 
     }
@@ -79,6 +81,13 @@ public class ItemService {
             return repo.save(c);
             
         } catch (Exception e) {
+            Throwable t = e;
+            while (t.getCause() != null){
+                t = t.getCause();
+                if (t instanceof ConstraintViolationException){
+                    throw ((ConstraintViolationException) t);
+                }
+            }
             throw new RuntimeException("Falha ao salvar o Item");
         }
 

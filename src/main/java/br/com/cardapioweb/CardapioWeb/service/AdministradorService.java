@@ -5,6 +5,7 @@
  */
 package br.com.cardapioweb.CardapioWeb.service;
 
+import br.com.cardapioweb.CardapioWeb.exception.NotFoundException;
 import br.com.cardapioweb.CardapioWeb.model.Administrador;
 import br.com.cardapioweb.CardapioWeb.model.Usuario;
 import br.com.cardapioweb.CardapioWeb.repository.AdministradorRepository;
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.validation.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.data.domain.*;
@@ -45,7 +47,7 @@ public class AdministradorService {
     public Administrador findById(Integer id) {
         Optional<Administrador> result = repo.findById(id);
         if (result.isEmpty()) {
-            throw new RuntimeException("Administrador não encontrado");
+            throw new NotFoundException("Administrador não encontrado");
         }
         return result.get();
     }
@@ -55,6 +57,13 @@ public class AdministradorService {
         try {
             return repo.save(a);
         } catch (Exception e) {
+//            Throwable t = e;
+//            while (t.getCause() != null){
+//                t = t.getCause();
+//                if (t instanceof ConstraintViolationException){
+//                    throw ((ConstraintViolationException) t);
+//                }
+//            }
             throw new RuntimeException("Falha ao salvar o adm");
         }
     }
@@ -69,6 +78,13 @@ public class AdministradorService {
            a.setLogin(obj.getLogin());
             return repo.save(a);
         } catch (Exception e) {
+            Throwable t = e;
+            while (t.getCause() != null){
+                t = t.getCause();
+                if (t instanceof ConstraintViolationException){
+                    throw ((ConstraintViolationException) t);
+                }
+            }
             throw new RuntimeException("Falha ao salvar o Administrador");
         }
 

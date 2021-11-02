@@ -5,11 +5,13 @@
  */
 package br.com.cardapioweb.CardapioWeb.service;
 
+import br.com.cardapioweb.CardapioWeb.exception.NotFoundException;
 import br.com.cardapioweb.CardapioWeb.model.Funcionario;
 import br.com.cardapioweb.CardapioWeb.model.Usuario;
 import br.com.cardapioweb.CardapioWeb.repository.FuncionarioRepository;
 import java.util.List;
 import java.util.Optional;
+import javax.validation.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -38,7 +40,7 @@ public class FuncionarioService {
     public Funcionario findById(Integer id) {
         Optional<Funcionario> result = repo.findById(id);
         if (result.isEmpty()) {
-            throw new RuntimeException("Funcionario não encontrado");
+            throw new NotFoundException("Funcionario não encontrado");
         }
         return result.get();
     }
@@ -49,6 +51,13 @@ public class FuncionarioService {
         try {
             return repo.save(f);
         } catch (Exception e) {
+//            Throwable t = e;
+//            while (t.getCause() != null){
+//                t = t.getCause();
+//                if (t instanceof ConstraintViolationException){
+//                    throw ((ConstraintViolationException) t);
+//                }
+//            }
             throw new RuntimeException("Falha ao salvar o funcionário");
         }
     }
@@ -67,6 +76,13 @@ public class FuncionarioService {
             
             return repo.save(f);
         } catch (Exception e) {
+            Throwable t = e;
+            while (t.getCause() != null){
+                t = t.getCause();
+                if (t instanceof ConstraintViolationException){
+                    throw ((ConstraintViolationException) t);
+                }
+            }
             throw new RuntimeException("Falha ao salvar o funcionario");
         }
 

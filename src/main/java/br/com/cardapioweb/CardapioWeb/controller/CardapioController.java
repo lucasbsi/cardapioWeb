@@ -48,7 +48,7 @@ public class CardapioController {
         return ResponseEntity.ok(service.findById(id));
     }
     
-    @PostMapping
+    @PostMapping                //(@Valid \/
     public ResponseEntity save(@Valid @RequestBody Cardapio cardapio){
         cardapio.setId(null);
         service.save(cardapio);
