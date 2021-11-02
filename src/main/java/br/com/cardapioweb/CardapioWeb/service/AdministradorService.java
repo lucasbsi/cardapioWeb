@@ -55,7 +55,7 @@ public class AdministradorService {
         try {
             return repo.save(a);
         } catch (Exception e) {
-            throw new RuntimeException("Falha ao salvar o funcionário");
+            throw new RuntimeException("Falha ao salvar o adm");
         }
     }
 
