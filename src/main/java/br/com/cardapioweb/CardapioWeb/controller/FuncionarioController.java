@@ -77,10 +77,11 @@ public class FuncionarioController {
     public ResponseEntity alterarSenha(@PathVariable("id") Integer id,
             @RequestParam(name = "senhaAtual", defaultValue = "", required = true) String senhaAtual,
             @RequestParam(name = "novaSenha", defaultValue = "", required = true) String novaSenha,
-            @RequestParam(name = "confirmarNovaSenha", defaultValue = "", required = true) String confirmarNovaSenha){
+            @RequestParam(name = "confirmarNovaSenha", defaultValue = "",required = true) String confirmarNovaSenha){
         
         Funcionario f = service.findById(id);
         service.update(f, senhaAtual, novaSenha, confirmarNovaSenha);
+        System.out.println(f);
         return ResponseEntity.ok(id);
     }
 }

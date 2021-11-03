@@ -62,7 +62,7 @@ public class AdministradorController {
     @PutMapping("/{id}")
     public ResponseEntity update(@PathVariable("id") Integer id, @RequestBody Administrador administrador){
         administrador.setId(id);
-        service.update(administrador, "", administrador.getSenha(), administrador.getSenha());
+        service.update(administrador, "", "", "");
         
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
@@ -73,6 +73,18 @@ public class AdministradorController {
     public ResponseEntity delete(@PathVariable("id") Integer id){
         service.delete(id);
         return ResponseEntity.ok().build();
+    }
+    
+    @PutMapping(path = "/{id}/alterarSenha")
+    public ResponseEntity alterarSenha(@PathVariable("id") Integer id,
+            @RequestParam(name = "senhaAtual", defaultValue = "", required = true) String senhaAtual,
+            @RequestParam(name = "novaSenha", defaultValue = "", required = true) String novaSenha,
+            @RequestParam(name = "confirmarNovaSenha", defaultValue = "",required = true) String confirmarNovaSenha){
+        
+        Administrador f = service.findById(id);
+        service.update(f, senhaAtual, novaSenha, confirmarNovaSenha);
+        System.out.println(f);
+        return ResponseEntity.ok(id);
     }
     
     

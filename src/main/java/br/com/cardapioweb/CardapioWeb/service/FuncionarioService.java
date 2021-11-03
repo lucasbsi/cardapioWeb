@@ -66,7 +66,6 @@ public class FuncionarioService {
         //Verifica se o funcionário já existe
         Funcionario obj = findById(f.getId());
         //Verifica alteração da senha
-
         alterarSenha(obj, senhaAtual, novaSenha, confirmarNovaSenha);
         try {
             f.setCpf(obj.getCpf());// garante que o cpf permaneça o mesmo já cadastrado no banco

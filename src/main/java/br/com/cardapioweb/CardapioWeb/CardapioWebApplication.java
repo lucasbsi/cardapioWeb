@@ -5,6 +5,7 @@ import br.com.cardapioweb.CardapioWeb.repository.AdministradorRepository;
 import br.com.cardapioweb.CardapioWeb.repository.CardapioRepository;
 import br.com.cardapioweb.CardapioWeb.repository.FuncionarioRepository;
 import br.com.cardapioweb.CardapioWeb.repository.ItemRepository;
+import br.com.cardapioweb.CardapioWeb.service.FuncionarioService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -25,6 +26,8 @@ public class CardapioWebApplication implements CommandLineRunner{
     
     @Autowired  // já cria uma instância de itemRepo
     private ItemRepository itemRepo;
+    
+    
             
     public static void main(String[] args) {
             SpringApplication.run(CardapioWebApplication.class, args);
@@ -53,6 +56,9 @@ public class CardapioWebApplication implements CommandLineRunner{
         
         funcionarioRepo.save(fun1);
         
+        
+        
+        
         Administrador adm2 = new Administrador();
         adm2.setLogin("bca");
         adm2.setNome("bca");
@@ -60,6 +66,7 @@ public class CardapioWebApplication implements CommandLineRunner{
         adm2.setTelefone("(22) 8888-8888");
         
         administradorRepo.save(adm2);
+        
         
         
          //Funcionario;
