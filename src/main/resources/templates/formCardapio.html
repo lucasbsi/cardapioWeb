@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{fragmentos :: imports-css(title='Cardapios')}">
+        <title>...</title>
+
+    </head>
+    <body>
+        <div th:replace="~{fragmentos :: barramenu(pagina='cardapios')}"/>
+
+        <div class="container" style="width: 60%; margin-top: 20px">
+            <div class="card-header">
+                <h4>Cadastro de Cardapios
+                    <a class="btn btn-primary float-right" th:href="@{~/cardapios}" role="button">voltar</a>
+                </h4>
+            </div>
+            Mensagem de erro (fragmento)
+            <form th:object="${cardapio}" th:action="@{~/cardapios/cardapio/{id}(id=${cardapio.id})}" method="post" class="card-body">
+                <input type="hidden" th:field="*{id}"/>
+                <div class="form-row">
+                    <div class="form-group col-md-8">
+                        <label for="nome">Nome:</label>
+                        <input th:field="*{nome}" type="text" class="form-control" placeholder="Nome do Cardápio" required="required" maxlength="100"/>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label for="dia">Dia:</label>
+                        <input th:field="*{dia}" type="text" class="form-control" placeholder="Dia da Semana" required="required" maxlength="100"/>
+                    </div> 
+
+                </div>
+                <!--<div id="diasSemana" class="form-row">
+                    <input type="hidden" th:each="dias, i : ${tiposDias}" th:value="${dia}"/>
+                    <div class="card-body">
+                        <div class="form-row">
+
+                            <select class="form-control form-control-sm" th:field="">
+
+                            </select> 
+                        </div>
+
+                    </div>
+
+                </div>-->
+                <!--<div class="form-row">
+                    <div class="form-group col-md-8">
+                        <label for="itens">Itens:</label>
+                        <input th:field="*{cardapio.itens}" type="text" class="form-control" placeholder="Nome do Cardápio" required="required" maxlength="100"/>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label for="dia">Dia:</label>
+                        <input th:field="*{dia}" type="text" class="form-control" placeholder="Dia da Semana" required="required" maxlength="100"/>
+                    </div> 
+
+                </div>-->
+
+            </form>
+
+
+        </div>
+
+        <div th:replace="~{fragmentos :: imports-js}"/>
+    </body>
+</html>

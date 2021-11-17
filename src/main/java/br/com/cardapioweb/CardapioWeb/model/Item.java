@@ -33,7 +33,7 @@ public class Item implements Serializable {
     @NotBlank(message= "A descrição do item é obrigatório")
     @Length(max= 40, message= "A descrição do item deve ter no máximo 40 caracteres.")
     @DescriptionValidation(message = "A descrição está no formato incorreto. Ex.: Feijão")
-    private String descricao;
+    public String descricao;
     
     @Column(nullable = false, length = 6, unique = false, updatable = true)
     private Double valorAdicional;

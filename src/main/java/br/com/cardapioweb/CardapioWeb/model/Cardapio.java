@@ -41,7 +41,7 @@ public class Cardapio implements Serializable {
     @ManyToMany
     //@Valid
     @Size(min = 1)//restrição de um item criação de cardápio
-    private List<Item> itens = new ArrayList<>();
+    public List<Item> itens = new ArrayList<>();
     
     //@Enumerated
     @Column(nullable = false)

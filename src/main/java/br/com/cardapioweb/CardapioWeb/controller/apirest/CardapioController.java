@@ -3,10 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.cardapioweb.CardapioWeb.controller;
+package br.com.cardapioweb.CardapioWeb.controller.apirest;
 
-import br.com.cardapioweb.CardapioWeb.model.Administrador;
-import br.com.cardapioweb.CardapioWeb.service.AdministradorService;
+import br.com.cardapioweb.CardapioWeb.model.Cardapio;
+import br.com.cardapioweb.CardapioWeb.model.Funcionario;
+import br.com.cardapioweb.CardapioWeb.service.CardapioService;
+import br.com.cardapioweb.CardapioWeb.service.FuncionarioService;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,42 +30,38 @@ import org.springframework.web.bind.annotation.RestController;
  * @author lucas
  */
 @RestController
-@RequestMapping(path = "/apirest/administradores")
-public class AdministradorController {
+@RequestMapping(path = "/apirest/cardapios")
+public class CardapioController {
+    @Autowired// ponto de injeção
+    private CardapioService service;
     
-    @Autowired
-    private AdministradorService service;
-    
-    @GetMapping //equivale a @RequestMapping(method = RequestMethod.GET, path = "/getAll")
+    @GetMapping
     public ResponseEntity getAll(
             @RequestParam(name = "page", defaultValue = "0", required = false) int page, 
             @RequestParam(name = "size", defaultValue = "10", required = false)int size){
         
-        return ResponseEntity.status(HttpStatus.OK).body(service.findAll());
+        return ResponseEntity.ok(service.findAll(page, size));
     
-    }
-    
-    
+}
     @GetMapping( path = "/{id}")
     public ResponseEntity getOne(@PathVariable("id") Integer id){
         return ResponseEntity.ok(service.findById(id));
     }
     
-    
-    @PostMapping
-    public ResponseEntity save(@Valid @RequestBody Administrador administrador){
-        administrador.setId(null);
-        service.save(administrador);
+    @PostMapping                //(@Valid \/
+    public ResponseEntity save(@Valid @RequestBody Cardapio cardapio){
+        cardapio.setId(null);
+        service.save(cardapio);
         
-        return ResponseEntity.status(HttpStatus.CREATED).body(administrador);
+        return ResponseEntity.status(HttpStatus.CREATED).body(cardapio);
     
     }
     
     @PutMapping("/{id}")
-    public ResponseEntity update(@PathVariable("id") Integer id, @RequestBody Administrador administrador){
-        administrador.setId(id);
-        service.update(administrador, "", "", "");
-        
+    public ResponseEntity update(@PathVariable("id") Integer id, @RequestBody Cardapio cardapio){
+        cardapio.setId(id);
+        //rever pois a assinatura é service.update(cardapio, itens, nome)
+        service.update(cardapio, cardapio.getItem(), cardapio.getNome());
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
     
@@ -74,20 +72,6 @@ public class AdministradorController {
         service.delete(id);
         return ResponseEntity.ok().build();
     }
-    
-    @PutMapping(path = "/{id}/alterarSenha")
-    public ResponseEntity alterarSenha(@PathVariable("id") Integer id,
-            @RequestParam(name = "senhaAtual", defaultValue = "", required = true) String senhaAtual,
-            @RequestParam(name = "novaSenha", defaultValue = "", required = true) String novaSenha,
-            @RequestParam(name = "confirmarNovaSenha", defaultValue = "",required = true) String confirmarNovaSenha){
-        
-        Administrador f = service.findById(id);
-        service.update(f, senhaAtual, novaSenha, confirmarNovaSenha);
-        System.out.println(f);
-        return ResponseEntity.ok(id);
-    }
-    
-    
     
     
     

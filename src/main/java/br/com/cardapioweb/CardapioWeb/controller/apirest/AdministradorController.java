@@ -3,11 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.cardapioweb.CardapioWeb.controller;
+package br.com.cardapioweb.CardapioWeb.controller.apirest;
 
 import br.com.cardapioweb.CardapioWeb.model.Administrador;
-import br.com.cardapioweb.CardapioWeb.model.Funcionario;
-import br.com.cardapioweb.CardapioWeb.service.FuncionarioService;
+import br.com.cardapioweb.CardapioWeb.service.AdministradorService;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,39 +27,42 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author lucas
  */
-
 @RestController
-@RequestMapping(path = "/apirest/funcionarios")
-public class FuncionarioController {
-    @Autowired// ponto de injeção
-    private FuncionarioService service;
+@RequestMapping(path = "/apirest/administradores")
+public class AdministradorController {
     
-    @GetMapping
+    @Autowired
+    private AdministradorService service;
+    
+    @GetMapping //equivale a @RequestMapping(method = RequestMethod.GET, path = "/getAll")
     public ResponseEntity getAll(
             @RequestParam(name = "page", defaultValue = "0", required = false) int page, 
             @RequestParam(name = "size", defaultValue = "10", required = false)int size){
         
-        return ResponseEntity.ok(service.findAll(page, size));
+        return ResponseEntity.status(HttpStatus.OK).body(service.findAll());
     
-}
+    }
+    
+    
     @GetMapping( path = "/{id}")
     public ResponseEntity getOne(@PathVariable("id") Integer id){
         return ResponseEntity.ok(service.findById(id));
     }
     
+    
     @PostMapping
-    public ResponseEntity save(@Valid @RequestBody Funcionario funcionario){
-        funcionario.setId(null);
-        service.save(funcionario);
+    public ResponseEntity save(@Valid @RequestBody Administrador administrador){
+        administrador.setId(null);
+        service.save(administrador);
         
-        return ResponseEntity.status(HttpStatus.CREATED).body(funcionario);
+        return ResponseEntity.status(HttpStatus.CREATED).body(administrador);
     
     }
     
     @PutMapping("/{id}")
-    public ResponseEntity update(@PathVariable("id") Integer id, @RequestBody Funcionario funcionario){
-        funcionario.setId(id);
-        service.update(funcionario, "", "", "");
+    public ResponseEntity update(@PathVariable("id") Integer id, @RequestBody Administrador administrador){
+        administrador.setId(id);
+        service.update(administrador, "", "", "");
         
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
@@ -79,9 +81,15 @@ public class FuncionarioController {
             @RequestParam(name = "novaSenha", defaultValue = "", required = true) String novaSenha,
             @RequestParam(name = "confirmarNovaSenha", defaultValue = "",required = true) String confirmarNovaSenha){
         
-        Funcionario f = service.findById(id);
+        Administrador f = service.findById(id);
         service.update(f, senhaAtual, novaSenha, confirmarNovaSenha);
         System.out.println(f);
         return ResponseEntity.ok(id);
     }
+    
+    
+    
+    
+    
+    
 }

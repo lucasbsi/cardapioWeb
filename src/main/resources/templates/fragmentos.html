@@ -17,7 +17,7 @@ and open the template in the editor.
             <div class="container">
                 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                     <a class="navbar-brand" href="/">
-                        <img th:src="@{~/images/sino.png}" width="30" height="30" class="d-inline-block align-top"/>
+                        <img th:src="@{~/images/beanmask.jpg}" width="30" height="30" class="d-inline-block align-top"/>
                         Feijão do bom
                     </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#textoNavbar" aria-controls="textoNavbar" aria-expanded="false" aria-label="Alterna navegação">
@@ -33,6 +33,9 @@ and open the template in the editor.
                             </li>
                             <li class="nav-item" th:classappend="${pagina == 'cardapios' ? 'active' : ''}">
                                 <a class="nav-link" th:href="@{~/cardapios}">Cardapios</a>
+                            </li>
+                            <li class="nav-item" th:classappend="${pagina == 'itens' ? 'active' : ''}">
+                                <a class="nav-link" th:href="@{~/itens}">Itens</a>
                             </li>
                         </ul>
                     </div>
