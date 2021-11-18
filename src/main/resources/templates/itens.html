@@ -17,13 +17,14 @@
             </div>
 
             <div class="card" th:each="item : ${itens}">
-                <div class="card-body">
-                    <h5 class="card-title" th:text="${item.id}"></h5>
+                
+                    
                     <!--<h5 class="card-title" th:text="${cardapio.itens}"></h5>-->
-                </div>
+                
                 <div class="card-body">
 
                     <div class="card-text">
+                        <h5 class="card-title" th:text="${item.id}"></h5>
                         <h5 class="card-title" th:text="${item.descricao}"></h5>
                         <!-- <span>Itens:</span>
                          <h5 class="card-title" th:text="${cardapio.itens}"></h5><!--lista o objeto itens-->

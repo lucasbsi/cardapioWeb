@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-    <head th:replace="~{fragmentos :: imports-css(title='Lista de Funcionarios')}">
+    <head th:replace="~{fragmentos :: imports-css(title='Funcionarios')}">
         <title>...</title>
 
     </head>
@@ -18,23 +18,38 @@
 
             <div class="card" th:each="funcionario : ${funcionarios}">
                 <div class="card-body">
-                    <label>Nome:</label>
+                    <!--<label>Nome:</label>
                     <h5 class="card-title" th:text="${funcionario.nome}"></h5>
                     <label>Login:</label>
                     <h5 class="card-title" th:text="${funcionario.login}"></h5>
                     <label>Senha:</label>
                     <h5 class="card-title" th:text="${funcionario.senha}"></h5>
+                    <label>CPF:</label>
+                    <h5 class="card-title" th:text="${funcionario.cpf}"></h5>
+                    <label>Telefone:</label>
+                    <h5 class="card-title" th:text="${funcionario.telefone}"></h5>-->
+                    
+                    
+                   <h2 class="card-title" th:text="'Nome: '+${funcionario.nome}"></h2>
+                    
+                    <h5 class="card-text" th:text="'Login: '+${funcionario.login}"></h5>
+                    
+                    <h5 class="card-text" th:text="'Senha: '+${funcionario.senha}"></h5>
+                    
+                    <h5 class="card-text" th:text="'CPF: '+${funcionario.cpf}"></h5>
+                    
+                    <h5 class="card-text" th:text="'Telefone: '+${funcionario.telefone}"></h5>
                     <!--<h5 class="card-title" th:text="${cardapio.itens}"></h5>-->
                 </div>
                 <div class="card-body">
 
-                   <!--<div class="card-text">
-                        <h5 class="card-title" th:text="${funcionario.login}"></h5>
-
-                        <span>Itens:</span>
-                        <h5 th:each="item, i : ${cardapio.itens}" th:text="${i.last} ? ${item.descricao} : ${item.descricao+'  '}">
-                        </h5>
-                    </div>-->
+                    <!--<div class="card-text">
+                         <h5 class="card-title" th:text="${funcionario.login}"></h5>
+ 
+                         <span>Itens:</span>
+                         <h5 th:each="item, i : ${cardapio.itens}" th:text="${i.last} ? ${item.descricao} : ${item.descricao+'  '}">
+                         </h5>
+                     </div>-->
                     <div class="card-text">
                         <!--<a th:href="@{~/cardapios/(idCardapio=${cardapio.id})}" class="btn btn-success">Reservas</a>-->
                         <a th:href="@{'~/funcionarios/funcionario/'+${funcionario.id}}" class="btn btn-warning">Editar</a>

@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -34,9 +35,15 @@ public class ItemViewController {
     
     @GetMapping(path = "/item")
     public String cadastro(Model model) {
-        model.addAttribute("hotel", new Item());
+        model.addAttribute("item", new Item());
         //model.addAttribute("tiposDias", DiaSemanaEnum.values());
         return "formItem";
+    }
+    
+    @GetMapping(path = "{id}/deletar")
+    public String deletar(@PathVariable("id") Integer id){
+      service.delete(id);
+      return "redirect:/itens";
     }
     
 }

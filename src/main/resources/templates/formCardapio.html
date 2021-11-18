@@ -29,8 +29,24 @@ and open the template in the editor.
 
                     <div class="form-group col-md-4">
                         <label for="dia">Dia:</label>
-                        <input th:field="*{dia}" type="text" class="form-control" placeholder="Dia da Semana" required="required" maxlength="100"/>
-                    </div> 
+
+                        <select class="form-control" name="dia">
+                            <option th:each="dia : ${T(br.com.cardapioweb.CardapioWeb.model.DiaSemanaEnum).values()}" th:value="${dia}" th:text="${dia}" />
+                        </select>
+                        
+                    </div>
+                    <!--<div class="form-row" th:if="${cardapio.id<>null}">-->
+                    <div class="form-row">
+                        <label>Itens:</label>
+                        <!--<select class="form-control" th:field="*{item.id}">
+                            <option th:each="item, i : ${itens}" th:text="${item.descricao}" th:value="${item.id}"></option>
+                        </select>-->
+
+                        <select class="form-control" >
+                            <!--<option th:each="item, i : ${itens}" th:text="${itens.descricao}" th:value="${itens.id}"></option>-->
+                        </select>
+                    </div>
+
 
                 </div>
                 <!--<div id="diasSemana" class="form-row">
