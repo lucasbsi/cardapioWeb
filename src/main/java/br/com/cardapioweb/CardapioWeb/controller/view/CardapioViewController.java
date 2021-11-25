@@ -47,6 +47,7 @@ public class CardapioViewController {
     @GetMapping(path = "/cardapio/{id}")
     public String editar(@PathVariable("id") Integer id, Model model) {
         model.addAttribute("cardapio", service.findById(id));
+        model.addAttribute("itens", serviceItem.findAll());
         //model.addAttribute("tiposDias", DiaSemanaEnum.values());
         return "formCardapio";
     }

@@ -25,4 +25,7 @@ public interface FuncionarioRepository extends JpaRepository<Funcionario, Intege
     @Query ("SELECT u FROM Usuario u WHERE u.cpf = :cpf")
     public List<Usuario> findByCpf (@Param("cpf") String cpf);
     
+    @Query ("SELECT u FROM Usuario u WHERE u.login = :login")
+    public Funcionario findByLogin(@Param("login") String login);
+    
 }

@@ -6,8 +6,11 @@
 package br.com.cardapioweb.CardapioWeb.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.br.CPF;
 
 /**
@@ -23,6 +26,11 @@ public class Funcionario extends Usuario {
     @CPF(message = "CPF inválido")
     @NotBlank(message = "CPF obrigatório")
     private String cpf;
+    
+    
+
+    
+    
 
     public Funcionario() {
     }
@@ -43,6 +51,10 @@ public class Funcionario extends Usuario {
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
+
+    
+
+    
 
     
     

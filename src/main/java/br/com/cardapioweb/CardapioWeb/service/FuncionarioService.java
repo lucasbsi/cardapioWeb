@@ -7,6 +7,7 @@ package br.com.cardapioweb.CardapioWeb.service;
 
 import br.com.cardapioweb.CardapioWeb.exception.NotFoundException;
 import br.com.cardapioweb.CardapioWeb.model.Funcionario;
+import br.com.cardapioweb.CardapioWeb.model.Permissao;
 import br.com.cardapioweb.CardapioWeb.model.Usuario;
 import br.com.cardapioweb.CardapioWeb.repository.FuncionarioRepository;
 import java.util.List;
@@ -15,6 +16,7 @@ import javax.validation.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 /**
@@ -48,7 +50,10 @@ public class FuncionarioService {
     public Funcionario save(Funcionario f) {
         // verifica se o cpf já está cadastrado
         verificaCpfCadastrado(f.getCpf());
+        //verifica permissoes nulas
+        removePermissoesNulas(f);
         try {
+            f.setSenha(new BCryptPasswordEncoder().encode(f.getSenha()));
             return repo.save(f);
         } catch (Exception e) {
 //            Throwable t = e;
@@ -65,6 +70,8 @@ public class FuncionarioService {
     public Funcionario update(Funcionario f, String senhaAtual, String novaSenha, String confirmarNovaSenha) {
         //Verifica se o funcionário já existe
         Funcionario obj = findById(f.getId());
+        //verifica permissoes nulas
+        removePermissoesNulas(f);
         //Verifica alteração da senha
         alterarSenha(obj, senhaAtual, novaSenha, confirmarNovaSenha);
         try {
@@ -113,9 +120,18 @@ public class FuncionarioService {
             if (novaSenha.equals(confirmarNovaSenha)) {
                 throw new RuntimeException("Nova senha e Confirmar senha não conferem");
             }
-            obj.setSenha(novaSenha);
+            obj.setSenha(new BCryptPasswordEncoder().encode(novaSenha));
         }
 
+    }
+    
+    public void removePermissoesNulas(Funcionario f){
+        f.getPermissoes().removeIf( (Permissao p) -> {
+            return p.getId()==null;
+        });
+        if(f.getPermissoes().isEmpty()){
+            throw new RuntimeException("Funcionario deve conter no mínimo 1 permissão.");
+        }
     }
 
 }

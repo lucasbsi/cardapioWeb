@@ -8,6 +8,7 @@ package br.com.cardapioweb.CardapioWeb.controller.view;
 import br.com.cardapioweb.CardapioWeb.model.Cardapio;
 import br.com.cardapioweb.CardapioWeb.model.DiaSemanaEnum;
 import br.com.cardapioweb.CardapioWeb.model.Funcionario;
+import br.com.cardapioweb.CardapioWeb.repository.PermissaoRepository;
 import br.com.cardapioweb.CardapioWeb.service.CardapioService;
 import br.com.cardapioweb.CardapioWeb.service.FuncionarioService;
 import java.util.ArrayList;
@@ -37,6 +38,8 @@ public class FuncionarioViewController {
 
     @Autowired
     private FuncionarioService service;
+    @Autowired
+    private PermissaoRepository permissaoRepo;
 
     @GetMapping //invoca a view cardapios
     public String getAll(Model model) {
@@ -47,6 +50,7 @@ public class FuncionarioViewController {
     @GetMapping(path = "/funcionario")
     public String cadastro(Model model) {
         model.addAttribute("funcionario", new Funcionario());
+        model.addAttribute("permissoes", permissaoRepo.findAll());
         //model.addAttribute("tiposDias", DiaSemanaEnum.values());
         return "formFuncionario";
     }
@@ -56,6 +60,10 @@ public class FuncionarioViewController {
             BindingResult result,
             @RequestParam("confirmarSenha") String confirmarSenha,
             Model model) {
+        //Valores a serem retornados
+        model.addAttribute("permissoes", permissaoRepo.findAll());
+        
+        
         if (result.hasErrors()) {
             model.addAttribute("msgErros", result.getAllErrors());
             return "formFuncionario";
@@ -81,6 +89,7 @@ public class FuncionarioViewController {
     @GetMapping(path = "/funcionario/{id}")
     public String editar(@PathVariable("id") Integer id, Model model) {
         model.addAttribute("funcionario", service.findById(id));
+        model.addAttribute("permissoes", permissaoRepo.findAll());
         //model.addAttribute("tiposDias", DiaSemanaEnum.values());
         return "formFuncionario";
     }
@@ -93,6 +102,10 @@ public class FuncionarioViewController {
             //@RequestParam(name = "novaSenha", defaultValue = "", required = true) String novaSenha,
             //@RequestParam(name = "confirmarNovaSenha", defaultValue = "",required = true) String confirmarNovaSenha,
             Model model){
+        
+        //Valores a serem retornados
+        model.addAttribute("permissoes", permissaoRepo.findAll());
+        
         List<FieldError> list = new ArrayList<>();
         for(FieldError fe : result.getFieldErrors()){
             if(!fe.getField().equals("senha")){

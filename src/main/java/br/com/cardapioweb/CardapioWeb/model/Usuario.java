@@ -7,6 +7,8 @@ package br.com.cardapioweb.CardapioWeb.model;
 
 import br.com.cardapioweb.CardapioWeb.annotation.PasswordValidation;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -32,9 +34,9 @@ public class Usuario implements Serializable{
     @Length(max= 8, message= "Login deve ter no máximo 8 caracteres.")
     private String login;
     
-    @Column(nullable = false, length = 10)
+    @Column(nullable = false)//, length = 10)
     @NotBlank(message= "Senha é obrigatório")
-    @Length(max= 10, message= "Senha deve ter no máximo 10 caracteres.")
+    //@Length(max= 10, message= "Senha deve ter no máximo 10 caracteres.")
     @PasswordValidation (message = "Senha inválida")
     private String senha;
     
@@ -46,6 +48,11 @@ public class Usuario implements Serializable{
     @Column(nullable = true, length = 14)
     @Length(max= 14, message= "Login deve ter no máximo 14 caracteres.")
     private String telefone;
+    
+    @ManyToMany(fetch = FetchType.EAGER)
+    @Size(min = 1, message = "Usuario deve ter no mínimo 1 permissão")
+    @Column
+    private List<Permissao> permissoes = new ArrayList<>();
 
     public Usuario() {
     }
@@ -125,6 +132,14 @@ public class Usuario implements Serializable{
             return false;
         }
         return true;
+    }
+
+    public List<Permissao> getPermissoes() {
+        return permissoes;
+    }
+
+    public void setPermissoes(List<Permissao> permissoes) {
+        this.permissoes = permissoes;
     }
 
     

@@ -5,12 +5,14 @@ import br.com.cardapioweb.CardapioWeb.repository.AdministradorRepository;
 import br.com.cardapioweb.CardapioWeb.repository.CardapioRepository;
 import br.com.cardapioweb.CardapioWeb.repository.FuncionarioRepository;
 import br.com.cardapioweb.CardapioWeb.repository.ItemRepository;
+import br.com.cardapioweb.CardapioWeb.repository.PermissaoRepository;
 import br.com.cardapioweb.CardapioWeb.service.FuncionarioService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @SpringBootApplication
 public class CardapioWebApplication implements CommandLineRunner{
@@ -27,6 +29,9 @@ public class CardapioWebApplication implements CommandLineRunner{
     @Autowired  // já cria uma instância de itemRepo
     private ItemRepository itemRepo;
     
+     @Autowired  // já cria uma instância de itemRepo
+    private PermissaoRepository permissaoRepo;
+    
     
             
     public static void main(String[] args) {
@@ -35,22 +40,30 @@ public class CardapioWebApplication implements CommandLineRunner{
 
     @Override
     public void run(String... args) throws Exception {
-        //Cliente
-        Administrador adm1 = new Administrador();
-        adm1.setLogin("abc");
-        adm1.setNome("lucas");
-        adm1.setSenha("senhA762@_");
-        adm1.setTelefone("(22) 9999-9999");
+        //Permissao
+        Permissao p1 = new Permissao();
+        p1.setNome("ADMIN");
+        Permissao p2 = new Permissao();
+        p2.setNome("FUNC");
+        permissaoRepo.saveAll(List.of(p1, p2));
         
-        administradorRepo.save(adm1);
+//        //Cliente
+//        Administrador adm1 = new Administrador();
+//        adm1.setLogin("abc");
+//        adm1.setNome("lucas");
+//        adm1.setSenha("senhA762@_");
+//        adm1.setTelefone("(22) 9999-9999");
+//        
+//        administradorRepo.save(adm1);
         
         
         
         //Funcionario;
         Funcionario fun1 = new Funcionario();
+        fun1.setPermissoes(List.of(p2));
         fun1.setLogin("amabit");
         fun1.setNome("Amarildo");
-        fun1.setSenha("senhA2@_");
+        fun1.setSenha(new BCryptPasswordEncoder().encode("senhA2@_"));
         fun1.setTelefone("(22) 8888-9999");
         fun1.setCpf("215.063.620-44");
         
@@ -60,24 +73,25 @@ public class CardapioWebApplication implements CommandLineRunner{
         
         
         Administrador adm2 = new Administrador();
+        adm2.setPermissoes(List.of(p2));
         adm2.setLogin("bca");
         adm2.setNome("bca");
-        adm2.setSenha("senhA962@_");
+        adm2.setSenha(new BCryptPasswordEncoder().encode("senhA962@_"));
         adm2.setTelefone("(22) 8888-8888");
         
         administradorRepo.save(adm2);
         
         
         
-         //Funcionario;
-        Funcionario fun2 = new Funcionario();
-        fun2.setLogin("zeus");
-        fun2.setNome("roberval");
-        fun2.setSenha("sogrA022@&");
-        fun2.setTelefone("(22) 1234-9999");
-        fun2.setCpf("173.475.180-08");
-        
-        funcionarioRepo.save(fun2);
+//         //Funcionario;
+//        Funcionario fun2 = new Funcionario();
+//        fun2.setLogin("zeus");
+//        fun2.setNome("roberval");
+//        fun2.setSenha(new BCryptPasswordEncoder().encode("sogrA022@&"));
+//        fun2.setTelefone("(22) 1234-9999");
+//        fun2.setCpf("173.475.180-08");
+//        
+//        funcionarioRepo.save(fun2);
         
         //-----------------------------------------------------------------------
         

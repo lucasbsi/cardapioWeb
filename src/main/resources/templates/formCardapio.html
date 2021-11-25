@@ -43,7 +43,7 @@ and open the template in the editor.
                         </select>-->
 
                         <select class="form-control" >
-                            <!--<option th:each="item, i : ${itens}" th:text="${itens.descricao}" th:value="${itens.id}"></option>-->
+                            <option th:each="item, i : ${itens}" th:text="${item.descricao}" th:value="${item.id}"></option>
                         </select>
                     </div>
 
