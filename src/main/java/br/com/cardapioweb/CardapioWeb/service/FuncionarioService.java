@@ -38,6 +38,10 @@ public class FuncionarioService {
         return repo.findAll();
 
     }
+    
+    public Funcionario findByLogin(String login){
+        return repo.findByLogin(login); 
+    }
 
     public Funcionario findById(Integer id) {
         Optional<Funcionario> result = repo.findById(id);

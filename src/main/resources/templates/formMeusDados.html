@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{fragmentos :: imports-css(title='Meus Dados')}">
+        <title>...</title>
+
+    </head>
+    <body>
+        <div th:replace="~{fragmentos :: barramenu(pagina='meusdados')}"/>
+
+        <div class="container" style="width: 60%; margin-top: 20px; width: 60%">
+            <div class="card-header">
+                <h4>Meus Dados
+                    <a class="btn btn-primary float-right" th:href="@{~/}" role="button">Voltar</a>
+                </h4>
+            </div>
+
+            <div th:replace="~{fragmentos :: mensagens}"></div>
+
+            <form th:object="${funcionario}" th:action="@{~/funcionarios/meusdados}" method="post" class="card-body">
+                <input type="hidden" th:field="*{id}"/>
+                <div class="form-row">
+                    <div class="form-group col-md-8">
+                        <label for="nome">Nome:</label>
+                        <input th:field="*{nome}" type="text" class="form-control" placeholder="Nome do Funcionário" required="required" maxlength="100"/>
+                    </div>
+
+                    <div class="form-group col-md-4" >
+                        <label for="cpf">CPF:</label>
+                        <input th:field="*{cpf}" type="text" class="form-control" placeholder="000.000.000-00" required="required" maxlength="100" readonly="readonly"/>
+                    </div> 
+
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="login">Login:</label>
+                        <input th:field="*{login}" type="text" class="form-control" placeholder="Login" required="required" maxlength="100"/>
+                    </div>
+
+                     
+
+                </div>
+                
+               
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="telefone">Telefone:</label>
+                        <input th:field="*{telefone}" type="text" class="form-control" placeholder="(00)00000-0000" required="required" maxlength="100"/>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <small class="form-text" style="color: #ff6666"> * Deixe os campos vazios se não quiser trocar sua senha.</small>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="senhaAtual">Senha atual:</label>
+                        <input th:name="senhaAtual" type="password" class="form-control" minlength="8"/>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="novaSenha">Nova senha:</label>
+                        <input name="novaSenha" type="password" class="form-control"  minlength="8"/>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="confirmarNovaSenha">Confirmar nova senha:</label>
+                        <input name="confirmarNovaSenha" type="password" class="form-control"  minlength="8"/>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <input type="submit" class="btn btn-success" value="salvar"/>
+                    
+                </div>
+            </form>
+
+
+        </div>
+
+        <div th:replace="~{fragmentos :: imports-js}"/>
+    </body>
+</html>

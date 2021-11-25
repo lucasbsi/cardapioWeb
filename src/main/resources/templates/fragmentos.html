@@ -4,7 +4,7 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
     <head th:fragment="imports-css(title)">
         <title th:text="${title}">Cardápio Online</title>
         <meta charset="UTF-8">
@@ -25,10 +25,10 @@ and open the template in the editor.
                     </button>
                     <div class="collapse navbar-collapse" id="textoNavbar">
                         <ul class="navbar-nav mr-auto">
-                            <li class="nav-item" th:classappend="${pagina == 'administradores' ? 'active' : ''}">
+                            <li class="nav-item" th:classappend="${pagina == 'administradores' ? 'active' : ''}" sec:authorize="hasRole('ROLE_ADMIN')">
                                 <a class="nav-link" th:href="@{~/administradores}">Administradores</a>
                             </li>
-                            <li class="nav-item" th:classappend="${pagina == 'funcionarios' ? 'active' : ''}">
+                            <li class="nav-item" th:classappend="${pagina == 'funcionarios' ? 'active' : ''}" sec:authorize="hasRole('ROLE_ADMIN')">
                                 <a class="nav-link" th:href="@{~/funcionarios}">Funcionarios</a>
                             </li>
                             <li class="nav-item" th:classappend="${pagina == 'cardapios' ? 'active' : ''}">
@@ -37,7 +37,11 @@ and open the template in the editor.
                             <li class="nav-item" th:classappend="${pagina == 'itens' ? 'active' : ''}">
                                 <a class="nav-link" th:href="@{~/itens}">Itens</a>
                             </li>
+                            <li class="nav-item" th:classappend="${pagina == 'meusdados' ? 'active' : ''}">
+                                <a class="nav-link" th:href="@{~/funcionarios/meusdados}">Meus Dados</a>
+                            </li>
                         </ul>
+                        <a sec:authorize="isAuthenticated()" class="btn btn-outline-danger" style="float: right" th:href="@{~/logout}" role="button">Sair</a>
                     </div>
                 </nav>
             </div>
