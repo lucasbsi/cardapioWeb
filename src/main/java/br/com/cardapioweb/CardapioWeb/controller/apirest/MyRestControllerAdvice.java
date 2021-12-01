@@ -19,6 +19,7 @@ import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.RestController;
         
 
 
@@ -28,7 +29,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
  *
  * @author lucas
  */
-@RestControllerAdvice //catalisador de exceção global
+@RestControllerAdvice(annotations = RestController.class) //catalisador de exceção global
 public class MyRestControllerAdvice {
     
     
